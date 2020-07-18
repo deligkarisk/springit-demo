@@ -34,7 +34,7 @@ public class SpringitApplication {
         };
     };
 
-    @Bean
+    //@Bean
     CommandLineRunner dbRunner(LinkRepository linkRepository, CommentRepository commentRepository) {
         return args -> {
             Link link = new Link("A new link","www.minime.org");
