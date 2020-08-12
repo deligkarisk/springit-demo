@@ -64,4 +64,9 @@ public class Link extends Auditable {
         return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    @OneToMany(mappedBy = "link")
+    private List<Vote> votes = new ArrayList<>();
+
+    private int voteCount = 0;
+
 }
