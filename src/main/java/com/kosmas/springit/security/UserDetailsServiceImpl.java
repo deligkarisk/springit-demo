@@ -1,4 +1,4 @@
-package com.kosmas.springit.Security;
+package com.kosmas.springit.security;
 
 import com.kosmas.springit.domain.User;
 import com.kosmas.springit.repository.UserRepository;
