@@ -3,8 +3,12 @@ package com.kosmas.springit.repository;
 import com.kosmas.springit.domain.Link;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LinkRepository extends JpaRepository<Link, Long> {
+import java.util.Optional;
 
-    Link findByTitle(String title);
+public interface LinkRepository extends JpaRepository<Link, Long> {
+  //  Link findOne(String id);
+    //Link findById();
+
+
 
 }
