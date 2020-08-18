@@ -7,11 +7,9 @@ import com.kosmas.springit.service.BeanUtil;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
+import org.springframework.security.access.prepost.PreInvocationAuthorizationAdviceVoter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.net.URI;
@@ -29,24 +27,15 @@ import java.util.List;
 @AllArgsConstructor
 public class Link extends Auditable implements Serializable {
 
-
-    //Link(id=6, title=Build a Secure Progressive Web App With Spring Boot and React,
-      //   url=https://dzone.com/articles/build-a-secure-progressive-web-app-with-spring-boo, votes=[], voteCount=0)
-
-
-   // Link(id=6, title=Build a Secure Progressive Web App With Spring Boot and React,
-     //    url=https://dzone.com/articles/build-a-secure-progressive-web-app-with-spring-boo,
-            // comments=[Comment{id=7}, Comment{id=8}, Comment{id=9}], votes=[], voteCount=0)
-
-  //  [Link(id=6, title=Build a Secure Progressive Web App With Spring Boot and React,
-    //      url=https://dzone.com/articles/build-a-secure-progressive-web-app-with-spring-boo,
-                  // comments=[Comment{id=7}, Comment{id=8}, Comment{id=9}], votes=[], voteCount=0)]
     @Id @GeneratedValue
     private Long id;
 
     @NonNull
     @NotEmpty(message = "Please enter a title.")
     private String title;
+
+    @ManyToOne
+    private User user;
 
     @NonNull
     @NotEmpty(message = "Please enter a url.")

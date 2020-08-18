@@ -1,5 +1,6 @@
 package com.kosmas.springit.domain;
 
+import com.kosmas.springit.domain.validator.PasswordsMatch;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -9,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Data
 @RequiredArgsConstructor
+@PasswordsMatch
 public class User implements UserDetails {
 
     @Id
@@ -30,6 +33,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
+
     @Column(length = 100)
     @NonNull
     private String password;
@@ -38,6 +42,23 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;
 
+    @NonNull
+    @NotEmpty(message = "You must enter First Name.")
+    private String firstName;
+
+    @NonNull
+    @NotEmpty(message = "You must enter Last Name.")
+    private String lastName;
+
+
+    @NonNull
+    @NotEmpty(message= "Please enter an alias")
+    @Column(nullable = false, unique = true)
+    private String alias;
+
+    @NotEmpty(message = "Please enter the confirmation password")
+    @Transient
+    private String confirmPassword;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -61,6 +82,13 @@ public class User implements UserDetails {
     }
 
 
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
+
+    private String activationCode;
 
     @Override
     public String getUsername() {
