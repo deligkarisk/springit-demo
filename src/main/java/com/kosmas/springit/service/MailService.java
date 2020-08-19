@@ -34,7 +34,7 @@ public class MailService {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
             message.setTo(to);
-            message.setFrom("noreply@springit.com");
+            message.setFrom("deligkarisk@gmail.com");
             message.setSubject(subject);
             message.setText(content,isHtml);
             javaMailSender.send(mimeMessage);
